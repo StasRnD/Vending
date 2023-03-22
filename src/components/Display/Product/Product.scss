@@ -1,0 +1,32 @@
+$font-large: 24px;
+$font-small: 16px;
+
+.product {
+  display: flex;
+  flex-direction: column;
+}
+
+.product__title {
+  margin: 0;
+  font-size: $font-large;
+}
+
+.product__category {
+  margin: 5px 0;
+  font-size: $font-small;
+}
+
+.product__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product__cost {
+  margin: 0;
+  font-size: $font-small;
+}
+
+.product__number {
+  font-size: $font-large;
+}

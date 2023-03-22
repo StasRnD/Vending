@@ -1,0 +1,27 @@
+%result-purchase__container {
+  background-color: #1e1e1e;
+  box-shadow: inset 0 0 0.25em #000;
+  border-radius: 3px;
+  padding: 12px;
+  width: calc(50% - 10px);
+}
+
+.result-purchase {
+  display: flex;
+  column-gap: 20px;
+}
+
+.result-purchase__returned-money {
+  @extend %result-purchase__container;
+  display: flex;
+  flex-direction: column;
+}
+
+.result-purchase__product {
+  @extend %result-purchase__container;
+}
+
+.result-purchase__returned-item {
+  margin: 0;
+  color: #0ff;
+}
