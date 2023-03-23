@@ -1,6 +1,6 @@
 import '../../InteractivePanel.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const allowedNumber = ['50', '100', '200', '500'];
 
@@ -10,33 +10,34 @@ export const DepositForm = () => {
   const dispatch = useDispatch();
   const depositAmount = useSelector((state: any) => state.depositAmount);
 
-  useEffect(() => {
-    if (depositAmount) {
-      setStatusText(`Inserted money: ${depositAmount}₽`);
-    }
+  const choiseTextLabel = useCallback(() => {
+    Number(depositAmount)
+      ? setStatusText(`Inserted money: ${depositAmount}₽`)
+      : setStatusText('Insert money');
   }, [depositAmount]);
 
-  const onChange = (evt: any) => {
+  useEffect(() => {
+    choiseTextLabel();
+  }, [choiseTextLabel]);
+
+  const handlerChange = (evt: any) => {
     setMoneyValues(evt.target.value);
   };
 
-  const all = allowedNumber.includes(moneyValues);
-
-  const submitForm = (evt: any) => {
+  const handlerSubmit = (evt: any) => {
     evt.preventDefault();
 
-    if (!all) {
-      setStatusText('no true');
-      setTimeout(() => {
-        setStatusText(`Inserted money: ${depositAmount}₽`);
-      }, 1500);
-    } else {
-      dispatch({ type: 'ADD_DEPOSIT', payload: moneyValues });
+    if (allowedNumber.includes(moneyValues)) {
+      return dispatch({ type: 'ADD_DEPOSIT', payload: moneyValues });
     }
+    setStatusText('no true');
+    setTimeout(() => {
+      choiseTextLabel();
+    }, 1500);
   };
 
   return (
-    <form className='interactive-panel__form' onSubmit={submitForm}>
+    <form className='interactive-panel__form' onSubmit={handlerSubmit}>
       <label htmlFor='deposit' className='interactive-panel__label'>
         {statusText}
       </label>
@@ -46,7 +47,7 @@ export const DepositForm = () => {
         className='interactive-panel__input'
         placeholder='...'
         value={moneyValues}
-        onChange={onChange}
+        onChange={handlerChange}
       />
       <p className='interactive-panel__input-info'>
         Available banknotes: 50, 100, 200 or 500 ₽. The machine gives change in
