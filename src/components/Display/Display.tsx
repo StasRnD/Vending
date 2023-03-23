@@ -1,17 +1,14 @@
 import './Display.scss';
 import { Product } from './Product/Product';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 export const Display = () => {
-  const dispatch = useDispatch();
   const listProducts = useSelector((state: any) => state.listProducts);
   const depositAmount = useSelector((state: any) => state.depositAmount);
 
-  useEffect(() => {
-    Number(depositAmount) &&
-      dispatch({ type: 'SET_ACIVE_PRODUCTS', payload: depositAmount });
-  }, [dispatch, depositAmount]);
+  const isActiveProduct = (product: any) => {
+    return product.cost <= depositAmount ? 'display__product-active' : '';
+  };
 
   return (
     <section className='display'>
@@ -20,9 +17,7 @@ export const Display = () => {
           return (
             <li
               key={index}
-              className={`display__product ${
-                product.isActive ? 'display__product-active' : ''
-              }`}
+              className={`display__product ${isActiveProduct(product)}`}
             >
               <Product
                 name={product.name}
