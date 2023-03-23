@@ -1,45 +1,29 @@
 import './Display.scss';
 import { Product } from './Product/Product';
-const products = [
-  {
-    name: 'Lay’s',
-    category: 'Chips',
-    cost: '75',
-    number: 1,
-  },
-  {
-    name: 'Coca-Cola',
-    category: 'Drink',
-    cost: '180',
-    number: 2,
-  },
-  {
-    name: 'Light',
-    category: 'Rusks',
-    cost: '220',
-    number: 3,
-  },
-  {
-    name: 'Chaka',
-    category: 'Peanut',
-    cost: '600',
-    number: 4,
-  },
-  {
-    name: 'Water',
-    category: 'Drink',
-    cost: '40',
-    number: 5,
-  },
-];
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 export const Display = () => {
+  const dispatch = useDispatch();
+  const listProducts = useSelector((state: any) => state.listProducts);
+  const depositAmount = useSelector((state: any) => state.depositAmount);
+
+  useEffect(() => {
+    Number(depositAmount) &&
+      dispatch({ type: 'SET_ACIVE_PRODUCTS', payload: depositAmount });
+  }, [dispatch, depositAmount]);
+
   return (
     <section className='display'>
       <ul className='display__product-list'>
-        {products.map((product, index) => {
+        {listProducts.map((product: any, index: any) => {
           return (
-            <li key={index} className='display__product'>
+            <li
+              key={index}
+              className={`display__product ${
+                product.isActive ? 'display__product-active' : ''
+              }`}
+            >
               <Product
                 name={product.name}
                 category={product.category}

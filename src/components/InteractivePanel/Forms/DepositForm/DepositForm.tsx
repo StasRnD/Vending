@@ -28,7 +28,7 @@ export const DepositForm = () => {
     evt.preventDefault();
 
     if (allowedNumber.includes(moneyValues)) {
-      return dispatch({ type: 'ADD_DEPOSIT', payload: moneyValues });
+      return dispatch({ type: 'SET_DEPOSIT', payload: moneyValues });
     }
     setStatusText('no true');
     setTimeout(() => {
