@@ -9,6 +9,7 @@ export const DepositForm = () => {
   const [statusText, setStatusText] = useState('Insert money');
   const dispatch = useDispatch();
   const depositAmount = useSelector((state: any) => state.depositAmount);
+  const choosedProduct = useSelector((state: any) => state.choosedProduct);
 
   const choiseTextLabel = useCallback(() => {
     Number(depositAmount)
@@ -20,11 +21,11 @@ export const DepositForm = () => {
     choiseTextLabel();
   }, [choiseTextLabel]);
 
-  const handlerChange = (evt: any) => {
+  const handleChange = (evt: any) => {
     setMoneyValues(evt.target.value);
   };
 
-  const handlerSubmit = (evt: any) => {
+  const handleSubmit = (evt: any) => {
     evt.preventDefault();
 
     if (allowedNumber.includes(moneyValues)) {
@@ -37,7 +38,7 @@ export const DepositForm = () => {
   };
 
   return (
-    <form className='interactive-panel__form' onSubmit={handlerSubmit}>
+    <form className='interactive-panel__form' onSubmit={handleSubmit}>
       <label htmlFor='deposit' className='interactive-panel__label'>
         {statusText}
       </label>
@@ -47,7 +48,8 @@ export const DepositForm = () => {
         className='interactive-panel__input'
         placeholder='...'
         value={moneyValues}
-        onChange={handlerChange}
+        onChange={handleChange}
+        disabled={choosedProduct}
       />
       <p className='interactive-panel__input-info'>
         Available banknotes: 50, 100, 200 or 500 ₽. The machine gives change in

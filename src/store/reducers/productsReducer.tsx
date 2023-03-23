@@ -33,7 +33,7 @@ const products = [
 
 const defaultState = {
   listProducts: products,
-  selectedNumberProduct: 0,
+  choosedProduct: 0,
   depositAmount: 0,
 };
 
@@ -43,6 +43,11 @@ export const productsReducer = (state = defaultState, action: any) => {
       return {
         ...state,
         depositAmount: state.depositAmount + Number(action.payload),
+      };
+    case 'SET_SELECTED_PRODUCT':
+      return {
+        ...state,
+        choosedProduct: action.payload,
       };
 
     default:
