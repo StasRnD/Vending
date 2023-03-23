@@ -1,4 +1,11 @@
-const products = [
+import { StateProps, ProductProps } from '../../types/productTypes';
+
+type actionProps = {
+  type: string;
+  payload: number;
+};
+
+const products: ProductProps[] = [
   {
     name: 'Lay’s',
     category: 'Chips',
@@ -31,13 +38,13 @@ const products = [
   },
 ];
 
-const defaultState = {
+const defaultState: StateProps = {
   listProducts: products,
   choosedProduct: 0,
   depositAmount: 0,
 };
 
-export const productsReducer = (state = defaultState, action: any) => {
+export const productsReducer = (state = defaultState, action: actionProps) => {
   switch (action.type) {
     case 'SET_DEPOSIT':
       return {

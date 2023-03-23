@@ -1,14 +1,17 @@
 import '../../InteractivePanel.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { StateProps } from '../../../../types/productTypes';
 
 export const ChooseForm = () => {
   const [statusText, setStatusText] = useState('/');
   const [selectedProduct, setSelectedProduct] = useState('');
   const dispatch = useDispatch();
-  const depositAmount = useSelector((state: any) => state.depositAmount);
-  const choosedProduct = useSelector((state: any) => state.choosedProduct);
-  const listProducts = useSelector((state: any) => state.listProducts);
+  const depositAmount = useSelector((state: StateProps) => state.depositAmount);
+  const choosedProduct = useSelector(
+    (state: StateProps) => state.choosedProduct
+  );
+  const listProducts = useSelector((state: StateProps) => state.listProducts);
 
   useEffect(() => {
     if (Number(depositAmount) > 0) {
@@ -16,23 +19,26 @@ export const ChooseForm = () => {
     }
   }, [depositAmount]);
 
-  const handleChanhge = (evt: any) => {
+  const handleChanhge = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedProduct(evt.target.value);
   };
 
-  const showTextError = (text: any) => {
+  const showTextError = (text: string) => {
     setStatusText(text);
     setTimeout(() => {
       setStatusText('Choose Product');
     }, 1500);
   };
 
-  const handleSubmit = (evt: any) => {
+  const handleSubmit = (evt: React.ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (selectedProduct > listProducts.length)
+    if (
+      Number(selectedProduct) > listProducts.length ||
+      isNaN(+selectedProduct)
+    )
       return showTextError('Enter correct product number');
-    if (depositAmount < listProducts[+selectedProduct - 1].cost)
+    if (depositAmount < +listProducts[+selectedProduct - 1].cost)
       return showTextError('Anof money');
 
     dispatch({ type: 'SET_SELECTED_PRODUCT', payload: selectedProduct });
@@ -52,7 +58,7 @@ export const ChooseForm = () => {
         placeholder='...'
         value={selectedProduct}
         onChange={handleChanhge}
-        disabled={choosedProduct || !Number(depositAmount)}
+        disabled={!!choosedProduct || !Number(depositAmount)}
       />
     </form>
   );

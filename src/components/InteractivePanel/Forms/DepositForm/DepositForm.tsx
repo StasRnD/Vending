@@ -1,6 +1,7 @@
 import '../../InteractivePanel.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
+import { StateProps } from '../../../../types/productTypes';
 
 const allowedNumber = ['50', '100', '200', '500'];
 
@@ -8,8 +9,10 @@ export const DepositForm = () => {
   const [moneyValues, setMoneyValues] = useState('');
   const [statusText, setStatusText] = useState('Insert money');
   const dispatch = useDispatch();
-  const depositAmount = useSelector((state: any) => state.depositAmount);
-  const choosedProduct = useSelector((state: any) => state.choosedProduct);
+  const depositAmount = useSelector((state: StateProps) => state.depositAmount);
+  const choosedProduct = useSelector(
+    (state: StateProps) => state.choosedProduct
+  );
 
   const choiseTextLabel = useCallback(() => {
     Number(depositAmount)
@@ -21,11 +24,11 @@ export const DepositForm = () => {
     choiseTextLabel();
   }, [choiseTextLabel]);
 
-  const handleChange = (evt: any) => {
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setMoneyValues(evt.target.value);
   };
 
-  const handleSubmit = (evt: any) => {
+  const handleSubmit = (evt: React.ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (allowedNumber.includes(moneyValues)) {
@@ -49,7 +52,7 @@ export const DepositForm = () => {
         placeholder='...'
         value={moneyValues}
         onChange={handleChange}
-        disabled={choosedProduct}
+        disabled={!!choosedProduct}
       />
       <p className='interactive-panel__input-info'>
         Available banknotes: 50, 100, 200 or 500 ₽. The machine gives change in
