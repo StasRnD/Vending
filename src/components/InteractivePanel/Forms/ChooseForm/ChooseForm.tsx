@@ -15,9 +15,7 @@ export const ChooseForm = () => {
   const listProducts = useSelector((state: StateProps) => state.listProducts);
 
   useEffect(() => {
-    if (depositAmount) {
-      setStatusText('Choose Product');
-    }
+    depositAmount ? setStatusText('Choose Product') : setStatusText('/');
   }, [depositAmount]);
 
   const handleChanhge = (evt: React.ChangeEvent<HTMLInputElement>) => {

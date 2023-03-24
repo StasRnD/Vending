@@ -23,7 +23,7 @@ export const DepositForm = () => {
 
   useEffect(() => {
     choiseTextLabel();
-  }, [choiseTextLabel]);
+  }, [choiseTextLabel, depositAmount]);
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setMoneyValues(Number(evt.target.value));
@@ -31,9 +31,9 @@ export const DepositForm = () => {
 
   const handleSubmit = (evt: React.ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
-
+    const newValuesDeposit = depositAmount + moneyValues;
     if (allowedNumber.includes(`${moneyValues}`)) {
-      return dispatch(setDepositAction(moneyValues));
+      return dispatch(setDepositAction(newValuesDeposit));
     }
     setStatusText('no true');
     setTimeout(() => {

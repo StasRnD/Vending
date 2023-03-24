@@ -52,7 +52,7 @@ export const productsReducer = (state = defaultState, action: actionProps) => {
     case SET_DEPOSIT:
       return {
         ...state,
-        depositAmount: state.depositAmount + action.payload,
+        depositAmount: action.payload,
       };
     case SET_SELECTED_PRODUCT:
       return {

@@ -2,7 +2,8 @@ export interface ProductProps {
   name: string;
   category: string;
   cost: number;
-  number: number;
+  number?: number;
+  onClick?: () => void;
 }
 
 export type StateProps = {
