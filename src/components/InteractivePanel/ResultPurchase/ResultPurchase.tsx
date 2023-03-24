@@ -13,12 +13,22 @@ export const ResultPurchase = () => {
     (state: StateProps) => state.choosedProduct
   );
   const listProducts = useSelector((state: StateProps) => state.listProducts);
+  const depositAmount = useSelector((state: StateProps) => state.depositAmount);
 
   const {
     name = '',
     category = '',
     cost = 0,
   } = choosedProduct ? listProducts[choosedProduct - 1] : {};
+
+  const returnSum = choosedProduct ? depositAmount - cost : 0;
+
+  const returnMoney = {
+    ten: Math.floor(returnSum / 10),
+    five: Math.floor((returnSum % 10) / 5),
+    two: Math.floor((returnSum % 5) / 2),
+    one: Math.floor((returnSum % 5) % 2),
+  };
 
   const clear = () => {
     dispatch(setDepositAction(0));
@@ -28,8 +38,18 @@ export const ResultPurchase = () => {
   return (
     <div className='result-purchase'>
       <div className='result-purchase__returned-money'>
-        <p className='.result-purchase__returned-money-item'> </p>
-        <p className='.result-purchase__returned-money-item'> </p>
+        <p className='result-purchase__returned-money-item'>
+          {returnMoney.ten ? `10₽: ${returnMoney.ten} coins` : ''}
+        </p>
+        <p className='result-purchase__returned-money-item'>
+          {returnMoney.five ? `5₽: ${returnMoney.five} coins` : ''}
+        </p>
+        <p className='result-purchase__returned-money-item'>
+          {returnMoney.two ? `2₽: ${returnMoney.two} coins` : ''}
+        </p>
+        <p className='result-purchase__returned-money-item'>
+          {returnMoney.one ? `1₽: ${returnMoney.one} coins` : ''}
+        </p>
       </div>
       <div className='result-purchase__product' onClick={clear}>
         {choosedProduct ? (
