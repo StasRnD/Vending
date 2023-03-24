@@ -5,7 +5,7 @@ import { StateProps } from '../../../../types/productTypes';
 
 export const ChooseForm = () => {
   const [statusText, setStatusText] = useState('/');
-  const [selectedProduct, setSelectedProduct] = useState('');
+  const [selectedProduct, setSelectedProduct] = useState(0);
   const dispatch = useDispatch();
   const depositAmount = useSelector((state: StateProps) => state.depositAmount);
   const choosedProduct = useSelector(
@@ -14,13 +14,13 @@ export const ChooseForm = () => {
   const listProducts = useSelector((state: StateProps) => state.listProducts);
 
   useEffect(() => {
-    if (Number(depositAmount) > 0) {
+    if (depositAmount) {
       setStatusText('Choose Product');
     }
   }, [depositAmount]);
 
   const handleChanhge = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedProduct(evt.target.value);
+    setSelectedProduct(Number(evt.target.value));
   };
 
   const showTextError = (text: string) => {
@@ -33,16 +33,13 @@ export const ChooseForm = () => {
   const handleSubmit = (evt: React.ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (
-      Number(selectedProduct) > listProducts.length ||
-      isNaN(+selectedProduct)
-    )
+    if (selectedProduct > listProducts.length)
       return showTextError('Enter correct product number');
-    if (depositAmount < +listProducts[+selectedProduct - 1].cost)
+    if (depositAmount < listProducts[selectedProduct - 1].cost)
       return showTextError('Anof money');
 
     dispatch({ type: 'SET_SELECTED_PRODUCT', payload: selectedProduct });
-    setSelectedProduct('');
+    setSelectedProduct(0);
     setStatusText('Success');
   };
 
@@ -56,9 +53,9 @@ export const ChooseForm = () => {
         id='choose-product'
         className='interactive-panel__input'
         placeholder='...'
-        value={selectedProduct}
+        value={selectedProduct || ''}
         onChange={handleChanhge}
-        disabled={!!choosedProduct || !Number(depositAmount)}
+        disabled={!!choosedProduct || !depositAmount}
       />
     </form>
   );

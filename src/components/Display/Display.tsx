@@ -8,9 +8,7 @@ export const Display = () => {
   const depositAmount = useSelector((state: StateProps) => state.depositAmount);
 
   const isActiveProduct = (product: ProductProps) => {
-    return Number(product.cost) <= depositAmount
-      ? 'display__product-active'
-      : '';
+    return product.cost <= depositAmount ? 'display__product-active' : '';
   };
 
   return (

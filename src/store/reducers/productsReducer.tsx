@@ -9,31 +9,31 @@ const products: ProductProps[] = [
   {
     name: 'Lay’s',
     category: 'Chips',
-    cost: '75',
+    cost: 75,
     number: 1,
   },
   {
     name: 'Coca-Cola',
     category: 'Drink',
-    cost: '180',
+    cost: 180,
     number: 2,
   },
   {
     name: 'Light',
     category: 'Rusks',
-    cost: '220',
+    cost: 220,
     number: 3,
   },
   {
     name: 'Chaka',
     category: 'Peanut',
-    cost: '600',
+    cost: 600,
     number: 4,
   },
   {
     name: 'Water',
     category: 'Drink',
-    cost: '40',
+    cost: 40,
     number: 5,
   },
 ];
@@ -49,7 +49,7 @@ export const productsReducer = (state = defaultState, action: actionProps) => {
     case 'SET_DEPOSIT':
       return {
         ...state,
-        depositAmount: state.depositAmount + Number(action.payload),
+        depositAmount: state.depositAmount + action.payload,
       };
     case 'SET_SELECTED_PRODUCT':
       return {

@@ -1,7 +1,7 @@
 export interface ProductProps {
   name: string;
   category: string;
-  cost: string;
+  cost: number;
   number: number;
 }
 

@@ -6,7 +6,7 @@ import { StateProps } from '../../../../types/productTypes';
 const allowedNumber = ['50', '100', '200', '500'];
 
 export const DepositForm = () => {
-  const [moneyValues, setMoneyValues] = useState('');
+  const [moneyValues, setMoneyValues] = useState(0);
   const [statusText, setStatusText] = useState('Insert money');
   const dispatch = useDispatch();
   const depositAmount = useSelector((state: StateProps) => state.depositAmount);
@@ -15,7 +15,7 @@ export const DepositForm = () => {
   );
 
   const choiseTextLabel = useCallback(() => {
-    Number(depositAmount)
+    depositAmount
       ? setStatusText(`Inserted money: ${depositAmount}₽`)
       : setStatusText('Insert money');
   }, [depositAmount]);
@@ -25,13 +25,13 @@ export const DepositForm = () => {
   }, [choiseTextLabel]);
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setMoneyValues(evt.target.value);
+    setMoneyValues(Number(evt.target.value));
   };
 
   const handleSubmit = (evt: React.ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (allowedNumber.includes(moneyValues)) {
+    if (allowedNumber.includes(`${moneyValues}`)) {
       return dispatch({ type: 'SET_DEPOSIT', payload: moneyValues });
     }
     setStatusText('no true');
@@ -50,7 +50,7 @@ export const DepositForm = () => {
         id='deposit'
         className='interactive-panel__input'
         placeholder='...'
-        value={moneyValues}
+        value={moneyValues || ''}
         onChange={handleChange}
         disabled={!!choosedProduct}
       />
