@@ -2,6 +2,7 @@ import '../../InteractivePanel.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { StateProps } from '../../../../types/productTypes';
+import { setSelectedProductAction } from '../../../../store/reducers/productsReducer';
 
 export const ChooseForm = () => {
   const [statusText, setStatusText] = useState('/');
@@ -38,7 +39,7 @@ export const ChooseForm = () => {
     if (depositAmount < listProducts[selectedProduct - 1].cost)
       return showTextError('Anof money');
 
-    dispatch({ type: 'SET_SELECTED_PRODUCT', payload: selectedProduct });
+    dispatch(setSelectedProductAction(selectedProduct));
     setSelectedProduct(0);
     setStatusText('Success');
   };

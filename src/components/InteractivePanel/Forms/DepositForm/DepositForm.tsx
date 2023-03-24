@@ -2,6 +2,7 @@ import '../../InteractivePanel.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
 import { StateProps } from '../../../../types/productTypes';
+import { setDepositAction } from '../../../../store/reducers/productsReducer';
 
 const allowedNumber = ['50', '100', '200', '500'];
 
@@ -32,7 +33,7 @@ export const DepositForm = () => {
     evt.preventDefault();
 
     if (allowedNumber.includes(`${moneyValues}`)) {
-      return dispatch({ type: 'SET_DEPOSIT', payload: moneyValues });
+      return dispatch(setDepositAction(moneyValues));
     }
     setStatusText('no true');
     setTimeout(() => {

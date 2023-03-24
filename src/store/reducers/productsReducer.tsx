@@ -44,14 +44,17 @@ const defaultState: StateProps = {
   depositAmount: 0,
 };
 
+const SET_DEPOSIT = 'SET_DEPOSIT';
+const SET_SELECTED_PRODUCT = 'SET_SELECTED_PRODUCT';
+
 export const productsReducer = (state = defaultState, action: actionProps) => {
   switch (action.type) {
-    case 'SET_DEPOSIT':
+    case SET_DEPOSIT:
       return {
         ...state,
         depositAmount: state.depositAmount + action.payload,
       };
-    case 'SET_SELECTED_PRODUCT':
+    case SET_SELECTED_PRODUCT:
       return {
         ...state,
         choosedProduct: action.payload,
@@ -61,3 +64,13 @@ export const productsReducer = (state = defaultState, action: actionProps) => {
       return state;
   }
 };
+
+export const setDepositAction = (payload: number) => ({
+  type: SET_DEPOSIT,
+  payload,
+});
+
+export const setSelectedProductAction = (payload: number) => ({
+  type: SET_SELECTED_PRODUCT,
+  payload,
+});
