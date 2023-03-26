@@ -17,15 +17,15 @@ export const useChosenProduct = () => {
 export const useSetDepositAction = () => {
   const dispatch = useDispatch();
 
-  return (num: number) => {
-    dispatch(setDepositAction(num));
+  return (value: number) => {
+    dispatch(setDepositAction(value));
   };
 };
 
 export const useSetSelectedProductAction = () => {
   const dispatch = useDispatch();
 
-  return (num: number) => {
-    dispatch(setSelectedProductAction(num));
+  return (value: number) => {
+    dispatch(setSelectedProductAction(value));
   };
 };
