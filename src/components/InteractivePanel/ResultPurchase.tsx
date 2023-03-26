@@ -1,21 +1,19 @@
-import style from './ResultPurchase.module.scss';
-import { ProductItem } from '../../Display/ProductItem';
-import {
-  setDepositAction,
-  setSelectedProductAction,
-} from '../../../store/reducer';
+import style from './styles.module.scss';
+import { ProductItem } from '../Display/ProductItem';
 import {
   useDepositAmount,
   useChosenProduct,
   useProducts,
-} from '../../../store/hooks';
-import { useDispatch } from 'react-redux';
+  useSetDepositAction,
+  useSetSelectedProductAction,
+} from '../../store/hooks';
 
 export const ResultPurchase = () => {
-  const dispatch = useDispatch();
   const depositAmount = useDepositAmount();
   const chosenProduct = useChosenProduct();
   const products = useProducts();
+  const setSelectedProduction = useSetSelectedProductAction();
+  const setDeposit = useSetDepositAction();
 
   const selectedProduct = chosenProduct
     ? products.find((product) => product.number === chosenProduct)
@@ -34,8 +32,8 @@ export const ResultPurchase = () => {
   };
 
   const clear = () => {
-    dispatch(setDepositAction(0));
-    dispatch(setSelectedProductAction(0));
+    setSelectedProduction(0);
+    setDeposit(0);
   };
 
   return (

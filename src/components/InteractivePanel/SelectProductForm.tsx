@@ -1,13 +1,12 @@
-import style from '../InteractivePanel.module.scss';
-import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { setSelectedProductAction } from '../../../store/reducer';
 
+import style from './styles.module.scss';
 import {
   useDepositAmount,
   useChosenProduct,
   useProducts,
-} from '../../../store/hooks';
+  useSetSelectedProductAction,
+} from '../../store/hooks';
 
 enum StatusText {
   ChooseProduct = 'Choose Product',
@@ -17,10 +16,10 @@ enum StatusText {
   stetText = '/',
 }
 
-export const ChooseForm = () => {
+export const SelectProductForm = () => {
   const [statusText, setStatusText] = useState<string>(StatusText.stetText);
   const [selectedProduct, setSelectedProduct] = useState<string>('');
-  const dispatch = useDispatch();
+  const setSelectedProduction = useSetSelectedProductAction();
   const depositAmount = useDepositAmount();
   const chosenProduct = useChosenProduct();
   const products = useProducts();
@@ -52,7 +51,7 @@ export const ChooseForm = () => {
       return showTextError(StatusText.NotEnoughMoney);
     }
 
-    dispatch(setSelectedProductAction(+selectedProduct));
+    setSelectedProduction(+selectedProduct);
     setSelectedProduct('');
     setStatusText(StatusText.Success);
   };

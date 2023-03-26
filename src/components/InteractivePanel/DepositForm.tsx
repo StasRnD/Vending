@@ -1,9 +1,11 @@
-import style from '../InteractivePanel.module.scss';
-
-import { useDispatch } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
-import { setDepositAction } from '../../../store/reducer';
-import { useDepositAmount, useChosenProduct } from '../../../store/hooks';
+
+import style from './styles.module.scss';
+import {
+  useDepositAmount,
+  useChosenProduct,
+  useSetDepositAction,
+} from '../../store/hooks';
 
 const allowedNumber = [50, 100, 200, 500];
 
@@ -19,7 +21,7 @@ export const DepositForm = () => {
 
   const depositAmount = useDepositAmount();
   const chosenProduct = useChosenProduct();
-  const dispatch = useDispatch();
+  const setDeposit = useSetDepositAction();
 
   const choiseTextLabel = useCallback(() => {
     depositAmount
@@ -36,7 +38,7 @@ export const DepositForm = () => {
     const newValuesDeposit = depositAmount + +insertMoney;
 
     if (allowedNumber.includes(+insertMoney)) {
-      return dispatch(setDepositAction(+newValuesDeposit));
+      return setDeposit(+newValuesDeposit);
     }
 
     setStatusText(StatuseText.MoneyNotAccepted);

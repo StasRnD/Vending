@@ -1,4 +1,4 @@
-import style from './ProductItem.module.scss';
+import style from './styles.module.scss';
 import { Product } from '../../types/vendingMachine';
 
 export const ProductItem = ({ name, category, cost, number }: Product) => {

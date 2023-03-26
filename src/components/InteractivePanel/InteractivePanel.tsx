@@ -1,13 +1,13 @@
-import style from './InteractivePanel.module.scss';
-import { DepositForm } from './Forms/DepositForm';
-import { ChooseForm } from './Forms/SelectProduct';
-import { ResultPurchase } from './ResultPurchase/ResultPurchase';
+import style from './styles.module.scss';
+import { DepositForm } from './DepositForm';
+import { SelectProductForm } from './SelectProductForm';
+import { ResultPurchase } from './ResultPurchase';
 
 export const InteractivePanel = () => {
   return (
     <section className={style.panel}>
       <DepositForm />
-      <ChooseForm />
+      <SelectProductForm />
       <ResultPurchase />
     </section>
   );

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { rootState } from '../types';
-import { setDepositAction } from './reducer';
+import { setDepositAction, setSelectedProductAction } from './reducer';
 
 export const useProducts = () => {
   return useSelector((state: rootState) => state.vendingMachine.listProducts);
@@ -14,7 +14,18 @@ export const useChosenProduct = () => {
   return useSelector((state: rootState) => state.vendingMachine.chosenProduct);
 };
 
-export const useSetDepositAction = (num = 0) => {
+export const useSetDepositAction = () => {
   const dispatch = useDispatch();
-  return dispatch(setDepositAction(num));
+
+  return (num: number) => {
+    dispatch(setDepositAction(num));
+  };
+};
+
+export const useSetSelectedProductAction = () => {
+  const dispatch = useDispatch();
+
+  return (num: number) => {
+    dispatch(setSelectedProductAction(num));
+  };
 };

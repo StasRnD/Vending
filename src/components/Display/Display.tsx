@@ -1,4 +1,4 @@
-import style from './Display.module.scss';
+import style from './styles.module.scss';
 import classNames from 'classnames';
 import { ProductItem } from './ProductItem';
 import { useProducts, useDepositAmount } from '../../store/hooks';
