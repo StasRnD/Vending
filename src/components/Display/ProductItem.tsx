@@ -1,5 +1,5 @@
 import style from './styles.module.scss';
-import { Product } from '../../types/vendingMachine';
+import { Product } from '../../types';
 
 export const ProductItem = ({ name, category, cost, number }: Product) => {
   return (

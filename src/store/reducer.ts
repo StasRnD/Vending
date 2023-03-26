@@ -1,5 +1,5 @@
-import { VendingMachineState, Product } from '../types/vendingMachine';
-import { createReducer, PayloadAction, createAction } from '@reduxjs/toolkit';
+import { VendingMachineState, Product } from '../types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const products: Product[] = [
   {
@@ -52,16 +52,18 @@ const defaultState: VendingMachineState = {
   depositAmount: 0,
 };
 
-export const setDepositAction = createAction<number>('SET_DEPOSIT');
-export const setSelectedProductAction = createAction<number>(
-  'SET_SELECTED_PRODUCT'
-);
-
-export const productsReducer = createReducer(defaultState, {
-  [setDepositAction.type]: (state, action: PayloadAction<number>) => {
-    state.depositAmount = action.payload;
-  },
-  [setSelectedProductAction.type]: (state, action: PayloadAction<number>) => {
-    state.chosenProduct = action.payload;
+export const vendingMachineReducer = createSlice({
+  name: 'vendingMachineReducer',
+  initialState: defaultState,
+  reducers: {
+    setDepositAction(state, action: PayloadAction<number>) {
+      state.depositAmount = action.payload;
+    },
+    setSelectedProductAction(state, action: PayloadAction<number>) {
+      state.chosenProduct = action.payload;
+    },
   },
 });
+
+export const { setDepositAction, setSelectedProductAction } =
+  vendingMachineReducer.actions;

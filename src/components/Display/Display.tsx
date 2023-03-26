@@ -2,7 +2,7 @@ import style from './styles.module.scss';
 import classNames from 'classnames';
 import { ProductItem } from './ProductItem';
 import { useProducts, useDepositAmount } from '../../store/hooks';
-import { Product } from '../../types/vendingMachine';
+import { Product } from '../../types';
 
 export const Display = () => {
   const amount = useDepositAmount();

@@ -1,8 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { productsReducer } from './reducer';
+import { vendingMachineReducer } from './reducer';
 
 export const store = configureStore({
   reducer: combineReducers({
-    vendingMachine: productsReducer,
+    vendingMachine: vendingMachineReducer.reducer,
   }),
 });

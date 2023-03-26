@@ -10,3 +10,7 @@ export type VendingMachineState = {
   chosenProduct: number;
   depositAmount: number;
 };
+
+export type rootState = {
+  vendingMachine: VendingMachineState;
+};
