@@ -1,6 +1,6 @@
 import './InteractivePanel.scss';
-import { DepositForm } from './Forms/DepositForm/DepositForm';
-import { ChooseForm } from './Forms/ChooseForm/ChooseForm';
+import { DepositForm } from './Forms/DepositForm';
+import { ChooseForm } from './Forms/SelectProduct';
 import { ResultPurchase } from './ResultPurchase/ResultPurchase';
 
 export const InteractivePanel = () => {

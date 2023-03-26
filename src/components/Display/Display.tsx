@@ -1,31 +1,29 @@
 import './Display.scss';
-import { Product } from './Product/Product';
-import { useSelector } from 'react-redux';
-import { StateProps, ProductProps } from '../../types/productTypes';
+import classNames from 'classnames';
+import { ProductItem } from './ProductItem';
+import { useProducts, useDepositAmount } from '../../store/hooks';
+import { Product } from '../../types/vendingMachine';
 
 export const Display = () => {
-  const listProducts = useSelector((state: StateProps) => state.listProducts);
-  const depositAmount = useSelector((state: StateProps) => state.depositAmount);
+  const amount = useDepositAmount();
+  const products = useProducts();
 
-  const isActiveProduct = (product: ProductProps) => {
-    return product.cost <= depositAmount ? 'display__product-active' : '';
+  const isActiveProduct = (product: Product) => {
+    return product.cost <= amount;
   };
 
   return (
     <section className='display'>
       <ul className='display__product-list'>
-        {listProducts.map((product: ProductProps, index: number) => {
+        {products.map((product: Product, index: number) => {
           return (
             <li
               key={index}
-              className={`display__product ${isActiveProduct(product)}`}
+              className={classNames('display__product', {
+                display__product_active: isActiveProduct(product),
+              })}
             >
-              <Product
-                name={product.name}
-                category={product.category}
-                cost={product.cost}
-                number={product.number}
-              />
+              <ProductItem {...product} />
             </li>
           );
         })}

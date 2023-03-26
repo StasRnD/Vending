@@ -1,33 +1,36 @@
 import './ResultPurchase.scss';
-import { Product } from '../../Display/Product/Product';
-import { StateProps } from '../../../types/productTypes';
+import { ProductItem } from '../../Display/ProductItem';
 import {
   setDepositAction,
   setSelectedProductAction,
-} from '../../../store/reducers/productsReducer';
-import { useDispatch, useSelector } from 'react-redux';
+} from '../../../store/reducer';
+import {
+  useDepositAmount,
+  useChosenProduct,
+  useProducts,
+} from '../../../store/hooks';
+import { useDispatch } from 'react-redux';
 
 export const ResultPurchase = () => {
   const dispatch = useDispatch();
-  const choosedProduct = useSelector(
-    (state: StateProps) => state.choosedProduct
-  );
-  const listProducts = useSelector((state: StateProps) => state.listProducts);
-  const depositAmount = useSelector((state: StateProps) => state.depositAmount);
+  const depositAmount = useDepositAmount();
+  const chosenProduct = useChosenProduct();
+  const products = useProducts();
 
-  const {
-    name = '',
-    category = '',
-    cost = 0,
-  } = choosedProduct ? listProducts[choosedProduct - 1] : {};
+  const selectedProduct = chosenProduct
+    ? products.find((product) => product.number === chosenProduct)
+    : null;
 
-  const returnSum = choosedProduct ? depositAmount - cost : 0;
+  const cost = selectedProduct ? selectedProduct.cost : 0;
+  const name = selectedProduct ? selectedProduct.name : '';
+  const category = selectedProduct ? selectedProduct.category : '';
+  const change = chosenProduct ? depositAmount - cost : 0;
 
   const returnMoney = {
-    ten: Math.floor(returnSum / 10),
-    five: Math.floor((returnSum % 10) / 5),
-    two: Math.floor((returnSum % 5) / 2),
-    one: Math.floor((returnSum % 5) % 2),
+    ten: Math.floor(change / 10),
+    five: Math.floor((change % 10) / 5),
+    two: Math.floor((change % 5) / 2),
+    one: Math.floor((change % 5) % 2),
   };
 
   const clear = () => {
@@ -52,9 +55,9 @@ export const ResultPurchase = () => {
         </p>
       </div>
       <div className='result-purchase__product' onClick={clear}>
-        {choosedProduct ? (
+        {chosenProduct ? (
           <div className='result-purchase__product-container'>
-            <Product name={name} cost={cost} category={category} />
+            <ProductItem name={name} cost={cost} category={category} />
           </div>
         ) : (
           ''

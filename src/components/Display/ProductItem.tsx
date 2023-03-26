@@ -1,7 +1,7 @@
-import './Product.scss';
-import { ProductProps } from '../../../types/productTypes';
+import './ProductItem.scss';
+import { Product } from '../../types/vendingMachine';
 
-export const Product = ({ name, category, cost, number }: ProductProps) => {
+export const ProductItem = ({ name, category, cost, number }: Product) => {
   return (
     <article className='product'>
       <h4 className='product__title'>{name}</h4>
