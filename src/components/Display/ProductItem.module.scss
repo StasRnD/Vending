@@ -1,0 +1,45 @@
+$font-large: 24px;
+$font-small: 16px;
+
+.product {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0;
+  font-size: $font-large;
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+.category {
+  margin: 5px 0;
+  font-size: $font-small;
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cost {
+  margin: 0;
+  font-size: $font-small;
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.number {
+  font-size: $font-large;
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
+}

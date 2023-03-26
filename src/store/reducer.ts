@@ -32,6 +32,18 @@ const products: Product[] = [
     cost: 40,
     number: 5,
   },
+  {
+    name: 'Fanta',
+    category: 'Cold Drink',
+    cost: 400,
+    number: 6,
+  },
+  {
+    name: 'Nutella',
+    category: 'Chocolate paste',
+    cost: 550,
+    number: 7,
+  },
 ];
 
 const defaultState: VendingMachineState = {

@@ -1,4 +1,4 @@
-import '../InteractivePanel.scss';
+import style from '../InteractivePanel.module.scss';
 import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { setSelectedProductAction } from '../../../store/reducer';
@@ -58,14 +58,14 @@ export const ChooseForm = () => {
   };
 
   return (
-    <form className='interactive-panel__form' onSubmit={handleSubmit}>
-      <label htmlFor='choose-product' className='interactive-panel__label'>
+    <form className={style.form} onSubmit={handleSubmit}>
+      <label htmlFor='choose-product' className={style.label}>
         {statusText}
       </label>
       <input
         type='text'
         id='choose-product'
-        className='interactive-panel__input'
+        className={style.input}
         placeholder='...'
         value={selectedProduct || ''}
         onChange={handleChange}

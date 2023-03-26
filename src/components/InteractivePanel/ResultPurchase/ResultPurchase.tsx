@@ -1,4 +1,4 @@
-import './ResultPurchase.scss';
+import style from './ResultPurchase.module.scss';
 import { ProductItem } from '../../Display/ProductItem';
 import {
   setDepositAction,
@@ -39,24 +39,24 @@ export const ResultPurchase = () => {
   };
 
   return (
-    <div className='result-purchase'>
-      <div className='result-purchase__returned-money'>
-        <p className='result-purchase__returned-money-item'>
+    <div className={style.result}>
+      <div className={style.returnedMoney}>
+        <p className={style.returnedMoneyItem}>
           {returnMoney.ten ? `10₽: ${returnMoney.ten} coins` : ''}
         </p>
-        <p className='result-purchase__returned-money-item'>
+        <p className={style.returnedMoneyItem}>
           {returnMoney.five ? `5₽: ${returnMoney.five} coins` : ''}
         </p>
-        <p className='result-purchase__returned-money-item'>
+        <p className={style.returnedMoneyItem}>
           {returnMoney.two ? `2₽: ${returnMoney.two} coins` : ''}
         </p>
-        <p className='result-purchase__returned-money-item'>
+        <p className={style.returnedMoneyItem}>
           {returnMoney.one ? `1₽: ${returnMoney.one} coins` : ''}
         </p>
       </div>
-      <div className='result-purchase__product' onClick={clear}>
+      <div className={style.product} onClick={clear}>
         {chosenProduct ? (
-          <div className='result-purchase__product-container'>
+          <div className={style.productContainer}>
             <ProductItem name={name} cost={cost} category={category} />
           </div>
         ) : (

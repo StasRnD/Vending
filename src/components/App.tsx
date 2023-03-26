@@ -1,10 +1,10 @@
 import { Display } from './Display/Display';
 import { InteractivePanel } from './InteractivePanel/InteractivePanel';
-import './App.scss';
+import style from './App.module.scss';
 
 const App = () => {
   return (
-    <div className='app'>
+    <div className={style.app}>
       <Display />
       <InteractivePanel />
     </div>

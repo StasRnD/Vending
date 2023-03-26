@@ -1,4 +1,4 @@
-import './Display.scss';
+import style from './Display.module.scss';
 import classNames from 'classnames';
 import { ProductItem } from './ProductItem';
 import { useProducts, useDepositAmount } from '../../store/hooks';
@@ -13,14 +13,14 @@ export const Display = () => {
   };
 
   return (
-    <section className='display'>
-      <ul className='display__product-list'>
+    <section className={style.display}>
+      <ul className={style.list}>
         {products.map((product: Product, index: number) => {
           return (
             <li
               key={index}
-              className={classNames('display__product', {
-                display__product_active: isActiveProduct(product),
+              className={classNames(style.container, {
+                [style.active]: isActiveProduct(product),
               })}
             >
               <ProductItem {...product} />

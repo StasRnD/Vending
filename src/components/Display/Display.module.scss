@@ -3,24 +3,35 @@
   padding: 20px;
   border-radius: 10px;
   height: 90vh;
+  @media screen and (max-width: 768px) {
+    height: auto;
+    padding: 10px;
+    min-height: 45vh;
+  }
 }
 
-.display__product-list {
+.list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 21px;
+  @media screen and (max-width: 768px) {
+    gap: 10px;
+  }
 }
 
-.display__product {
+.container {
   background-color: white;
   padding: 10px;
   border-radius: 3px;
   width: calc(33.3% - 14px);
+  @media screen and (max-width: 768px) {
+    width: calc(33.3% - 7px);
+  }
 }
 
-.display__product_active {
+.active {
   background-color: #0ff;
 }

@@ -1,0 +1,11 @@
+.app {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 15px;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    row-gap: 15px;
+    padding: 5px;
+  }
+}

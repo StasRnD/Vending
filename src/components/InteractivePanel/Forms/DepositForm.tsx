@@ -1,4 +1,5 @@
-import '../InteractivePanel.scss';
+import style from '../InteractivePanel.module.scss';
+
 import { useDispatch } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
 import { setDepositAction } from '../../../store/reducer';
@@ -55,20 +56,20 @@ export const DepositForm = () => {
   }, [depositAmount]);
 
   return (
-    <form className='interactive-panel__form' onSubmit={handleSubmit}>
-      <label htmlFor='deposit' className='interactive-panel__label'>
+    <form className={style.form} onSubmit={handleSubmit}>
+      <label htmlFor='deposit' className={style.label}>
         {statusText}
       </label>
       <input
         type='text'
         id='deposit'
-        className='interactive-panel__input'
+        className={style.input}
         placeholder='...'
         value={insertMoney || ''}
         onChange={handleChange}
         disabled={!!chosenProduct}
       />
-      <p className='interactive-panel__input-info'>
+      <p className={style.info}>
         Available banknotes: 50, 100, 200 or 500 ₽. The machine gives change in
         1, 2, 5 and 10 ₽ coins.
       </p>
